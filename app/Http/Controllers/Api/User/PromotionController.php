@@ -17,7 +17,12 @@ class PromotionController extends Controller
      */
     public function index()
     {
-        //
+        $promotions = PromotionCode::all();
+
+        return $this->responsed([
+            'success' => true,
+            'data' => PromotionResource::collection($promotions->load('users')),
+        ]);
     }
 
     /**
@@ -39,11 +44,14 @@ class PromotionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Model\Resource $resource
+     * @param  \App\Model\PromotionCode $promotion_code
      * @return \Illuminate\Http\Response
      */
     public function show(PromotionCode $promotion_code)
     {
-        //
+        return $this->responsed([
+            'success' => true,
+            'data' => new PromotionResource($promotion_code->load('users')),
+        ]);
     }
 }

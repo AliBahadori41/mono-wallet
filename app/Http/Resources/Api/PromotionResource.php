@@ -21,7 +21,7 @@ class PromotionResource extends JsonResource
             'end_date'=>  $this->end_date,
             'amount'=>  $this->amount,
             'quota'=>  $this->quota,
-            'users'=>  $this->users,
+            'users'=>  $this->whenLoaded('users', $this->user),
         ];
     }
 }
