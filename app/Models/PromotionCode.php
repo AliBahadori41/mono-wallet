@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\CodeableTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class PromotionCode extends Model
 {
-    use HasFactory;
+    use HasFactory, CodeableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -40,6 +41,6 @@ class PromotionCode extends Model
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'user_promotions');
     }
 }

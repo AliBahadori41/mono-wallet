@@ -63,6 +63,6 @@ class User extends Authenticatable
      */
     public function promotions(): BelongsToMany
     {
-        return $this->belongsToMany(PromotionCode::class);
+        return $this->belongsToMany(PromotionCode::class, 'user_promotions');
     }
 }
