@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\User\AssignPromotionRequest;
+use App\Http\Requests\Api\User\UsePromotionRequest;
 use App\Http\Requests\Api\User\LoginRequest;
 use App\Models\PromotionCode;
 use App\Models\User;
@@ -31,8 +31,18 @@ class UserController extends Controller
         return $this->responsed(['token' => $user->createToken('web-app')->plainTextToken], true);
     }
 
-    public function assignPromotion(AssignPromotionRequest $request)
+    /**
+     * Use the promotion code to incorrect user wallet.
+     *
+     * @param UsePromotionRequest $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function usePromotion(UsePromotionRequest $request)
     {
         $code = PromotionCode::where('code', $request->code)->first();
+
+        $request->user()->wallet->setBalance($code->amount);
+
+        return $this->responsed([], true);
     }
 }

@@ -17,6 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('user/login', [UserController::class, 'login']);
 
-Route::post('assign-promotion', [UserController::class, 'assignPromotion'])->middleware(['auth:sanctum']);
+Route::post('use-promotion', [UserController::class, 'usePromotion'])->middleware(['auth:sanctum']);
 
 Route::apiResource('backoffice/promotion-codes', PromotionController::class)->only(['index', 'show', 'store']);

@@ -28,4 +28,19 @@ class Wallet extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    /**
+     * Increment the balance of the given wallet
+     *
+     * @param integer $balance
+     * @return void
+     */
+    public function setBalance(int $newBalance): void
+    {
+        $currentBalance = $this->balance;
+
+        $this->balance = $currentBalance + $newBalance;
+
+        $this->save();
+    }
 }
