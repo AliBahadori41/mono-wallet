@@ -55,6 +55,10 @@ class PromotionController extends Controller
      */
     public function assignPromotion(PromotionCode $promotion_code, User $user)
     {
+        if ($promotion_code->quota == 0) {
+            return $this->responsed(['message' => 'Promotion code has been expired.'], false);
+        }
+
         $user->promotions()->syncWithoutDetaching($promotion_code);
 
         return $this->responsed();

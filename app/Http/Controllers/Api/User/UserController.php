@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\User;
 
+use App\Events\PromotionUsed;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\User\UsePromotionRequest;
 use App\Http\Requests\Api\User\LoginRequest;
@@ -42,6 +43,8 @@ class UserController extends Controller
         $code = PromotionCode::where('code', $request->code)->first();
 
         $request->user()->wallet->increaseBalance($code->amount);
+
+        event(new PromotionUsed($code));
 
         return $this->responsed();
     }
