@@ -14,19 +14,22 @@ class Controller extends BaseController
     /**
      * Response for the Api request
      *
-     * @param mixed $data
+     * @param mixed $passedData
      * @param bool $success
      * @param int $statusCode
      * @param array $header
      *
      * @return Illuminate\Http\JsonResponse
      */
-    public function responsed($data, bool $success, int $statusCode = 200, array $header = [])
+    public function responsed($passedData = [], bool $success = true, int $statusCode = 200, array $header = [])
     {
         $data = [
             'success' => $success,
-            'data' => $data,
         ];
+
+        if (count($passedData) > 0) {
+            $data['data'] = $passedData;
+        }
 
         return response()->json($data, $statusCode, $header);
     }

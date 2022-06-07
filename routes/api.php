@@ -19,4 +19,5 @@ Route::post('user/login', [UserController::class, 'login']);
 
 Route::post('use-promotion', [UserController::class, 'usePromotion'])->middleware(['auth:sanctum']);
 
+Route::post('backoffice/assign-promotion/{promotion_code:code}/user/{user}', [PromotionController::class, 'assignPromotion']);
 Route::apiResource('backoffice/promotion-codes', PromotionController::class)->only(['index', 'show', 'store']);

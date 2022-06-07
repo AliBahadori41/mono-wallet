@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Backoffice\PromotionStoreRequest;
 use App\Http\Resources\Api\PromotionResource;
 use App\Models\PromotionCode;
+use App\Models\User;
 
 class PromotionController extends Controller
 {
@@ -18,7 +19,7 @@ class PromotionController extends Controller
     {
         $promotions = PromotionCode::all();
 
-        return $this->responsed(PromotionResource::collection($promotions->load('users')), true);
+        return $this->responsed(PromotionResource::collection($promotions->load('users')));
     }
 
     /**
@@ -31,7 +32,7 @@ class PromotionController extends Controller
     {
         $promotion = PromotionCode::create($request->all());
 
-        return $this->responsed(new PromotionResource($promotion), true);
+        return $this->responsed(new PromotionResource($promotion));
     }
 
     /**
@@ -42,6 +43,20 @@ class PromotionController extends Controller
      */
     public function show(PromotionCode $promotion_code)
     {
-        return $this->responsed(new PromotionResource($promotion_code->load('users')), true);
+        return $this->responsed(new PromotionResource($promotion_code->load('users')));
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param  \App\Model\PromotionCode $promotion_code
+     * @param  \App\Model\User $user
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function assignPromotion(PromotionCode $promotion_code, User $user)
+    {
+        $user->promotions()->syncWithoutDetaching($promotion_code);
+
+        return $this->responsed();
     }
 }

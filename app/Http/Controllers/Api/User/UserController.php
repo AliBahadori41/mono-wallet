@@ -28,7 +28,7 @@ class UserController extends Controller
             ]);
         }
 
-        return $this->responsed(['token' => $user->createToken('web-app')->plainTextToken], true);
+        return $this->responsed(['token' => $user->createToken('web-app')->plainTextToken]);
     }
 
     /**
@@ -43,6 +43,6 @@ class UserController extends Controller
 
         $request->user()->wallet->setBalance($code->amount);
 
-        return $this->responsed([], true);
+        return $this->responsed();
     }
 }
