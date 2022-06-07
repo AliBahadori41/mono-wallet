@@ -41,7 +41,7 @@ class UserController extends Controller
     {
         $code = PromotionCode::where('code', $request->code)->first();
 
-        $request->user()->wallet->setBalance($code->amount);
+        $request->user()->wallet->increaseBalance($code->amount);
 
         return $this->responsed();
     }

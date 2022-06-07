@@ -35,7 +35,7 @@ class Wallet extends Model
      * @param integer $balance
      * @return void
      */
-    public function setBalance(int $newBalance): void
+    public function increaseBalance(int $newBalance): void
     {
         $currentBalance = $this->balance;
 
