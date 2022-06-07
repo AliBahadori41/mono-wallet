@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\User\PromotionController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\Backoffice\PromotionController;
+use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group([
-    'prefix' => 'backoffice'
-], function() {
-    Route::apiResource('promotion-codes', PromotionController::class)->only(['index', 'show', 'store']);
-});
+Route::post('user/login', [UserController::class, 'login']);
+
+Route::post('assign-promotion', [UserController::class, 'assignPromotion'])->middleware(['auth:sanctum']);
+
+Route::apiResource('backoffice/promotion-codes', PromotionController::class)->only(['index', 'show', 'store']);

@@ -4,7 +4,7 @@ namespace App\Http\Requests\Api\User;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PromotionStoreRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,10 +14,8 @@ class PromotionStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'start_date' => 'required|string|date|after:' . now(),
-            'end_date' => 'required|string|date|after:' . now(),
-            'amount' => 'required|integer',
-            'quota' => 'required|integer',
+            'email' => 'required|string|email|exists:users',
+            'password' => 'required|string'
         ];
     }
 }
