@@ -27,7 +27,7 @@ class Controller extends BaseController
             'success' => $success,
         ];
 
-        if (count($passedData) > 0) {
+        if ($passedData != []) {
             $data['data'] = $passedData;
         }
 
