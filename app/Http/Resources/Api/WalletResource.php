@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class PromotionResource extends JsonResource
+class WalletResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,13 +15,9 @@ class PromotionResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=> $this->id,
-            'code'=>  $this->code,
-            'start_date'=> $this->start_date,
-            'end_date'=>  $this->end_date,
-            'amount'=>  $this->amount,
-            'quota'=>  $this->quota,
-            'users'=>  UserResource::collection($this->whenLoaded('users')),
+            'id' => $this->id,
+            'balance' => $this->balance,
+            'updated_at' => $this->updated_at
         ];
     }
 }
